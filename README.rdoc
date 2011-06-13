@@ -2,6 +2,11 @@
 
 mongoid-simple-tags is a basic and simple tagging system for mongoid using map-reduce function
 
+== Install
+  Add the following to Gemfile:
+  
+    gem "mongoid-simple-tags"
+
 == Usage
  
 === Model
