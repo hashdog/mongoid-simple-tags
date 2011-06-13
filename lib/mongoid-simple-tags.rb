@@ -1,25 +1,3 @@
-# Basic tagging system for mongoid documents implemented with map-reduce function.
-# chebyte.com 2011
-#
-# class User
-#   include Mongoid::Document
-#   include Mongoid::Document::Taggable
-#  end
-# 
-#  u = User.new(:name => "Tuquito")
-#  u.tag_list = "linux, tucuman, free software"      
-#  u.tags     # => ["linux","tucuman","free software"]
-#  u.save
-#  
-#  User.tagged_with("linux") # => u
-#  User.tagged_with(["tucuman", "free software"]) # => u
-#  
-#  u2 = User.new(:name => "ubuntu")
-#  u2.tag_list = "linux"
-#  u2.save
-#  
-#  User.tagged_with("linux") # => [u, u2]
-
 module Mongoid
   module Document
     module Taggable
