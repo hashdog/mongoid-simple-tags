@@ -1,19 +1,35 @@
 = mongoid-simple-tags
 
-Description goes here.
+mongoid-simple-tags is a basic and simple tagging system for mongoid using map-reduce function
 
-== Contributing to mongoid-simple-tags
+== Usage
  
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+=== Model
+
+  class User
+    include Mongoid::Document
+    include Mongoid::Document::Taggable
+  end
+
+=== Console
+
+  u = User.new(:name => "Tuquito")
+  u.tag_list = "linux, tucuman, free software"      
+  u.tags     # => ["linux","tucuman","free software"]
+  u.save
+
+  User.tagged_with("linux") # => u
+  User.tagged_with(["tucuman", "free software"]) # => u
+
+  u2 = User.new(:name => "ubuntu")
+  u2.tag_list = "linux"
+  u2.save
+
+  User.tagged_with("linux") # => [u, u2]
+
 
 == Copyright
 
-Copyright (c) 2011 mauro. See LICENSE.txt for
+Copyright (c) 2011 chebyte(mauro torres). See LICENSE.txt for
 further details.
 
