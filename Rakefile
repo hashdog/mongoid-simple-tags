@@ -17,37 +17,13 @@ Jeweler::Tasks.new do |gem|
   gem.name = "mongoid-simple-tags"
   gem.homepage = "http://github.com/chebyte/mongoid-simple-tags"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{tags on mongoid made easy}
+  gem.description = %Q{basic and simple tagging system for mongoid}
   gem.email = "maurotorres@gmail.com"
-  gem.authors = ["mauro"]
+  gem.authors = ["chebyte"]
   # dependencies defined in Gemfile
+  gem.add_dependency('mongoid','>=2.0.2')
+  
 end
 Jeweler::RubygemsDotOrgTasks.new
 
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
-
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
-end
-
-task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "mongoid-simple-tags #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
