@@ -22,7 +22,7 @@ Jeweler::Tasks.new do |gem|
   gem.email = "maurotorres@gmail.com"
   gem.authors = ["chebyte"]
   # dependencies defined in Gemfile
-  gem.add_dependency('mongoid','>=2.0.2')
+  gem.add_dependency('mongoid','>=2.0.0')
   
 end
 Jeweler::RubygemsDotOrgTasks.new
