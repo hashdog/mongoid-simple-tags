@@ -81,24 +81,25 @@ describe "A Taggable model with scope" do
 	it "should return scoped tags when passing one option" do 
 		results = User.scoped_tags(organisation_id: @organisation_1.id)
 		assert !results.empty?
-		assert results.include?( {"_id"=>"linux", "value"=>2.0} )
-		assert results.include?( {"_id"=>"ubuntu", "value"=>2.0} )
-		assert results.include?( {"_id"=>"tucuman", "value"=>2.0} )
+
+		assert results.include?( {:name => "linux", :count => 2 } )
+		assert results.include?( {:name => "ubuntu", :count => 2 } )
+		assert results.include?( {:name => "tucuman", :count => 2 } )
 		
 		results = User.scoped_tags(organisation_id: @organisation_2.id)
 		assert !results.empty?
-		assert results.include?( {"_id"=>"linux", "value"=>1.0} )
-		 assert results.include?( {"_id"=>"microsoft", "value"=>1.0} )
-		 assert results.include?( {"_id"=>"windows", "value"=>1.0} )
-		 assert results.include?( {"_id"=>"tucuman", "value"=>2.0} )
+		assert results.include?( {:name =>"linux", :count => 1 } )
+		assert results.include?( {:name => "microsoft", :count => 1 } )
+		assert results.include?( {:name => "windows", :count => 1 } )
+		assert results.include?( {:name => "tucuman", :count => 2 } )
 	end
 
 	it "should return scoped tags when passing more than one option" do
 		results = User.scoped_tags(organisation_id: @organisation_1.id, name: @user_1.name)
 		assert !results.empty?
-		assert results.include?( {"_id"=>"linux", "value"=>1.0} )
-		assert results.include?( {"_id"=>"ubuntu", "value"=>1.0} )
-		assert results.include?( {"_id"=>"tucuman", "value"=>1.0} )
+		assert results.include?( {:name => "linux", :count => 1 } )
+		assert results.include?( {:name => "ubuntu", :count => 1 } )
+		assert results.include?( {:name => "tucuman", :count => 1 } )
 	end
 
 	after do

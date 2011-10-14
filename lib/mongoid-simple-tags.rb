@@ -74,7 +74,7 @@ module Mongoid
             :out => "scoped_tags",
             :query => scope
           )
-          results.find().to_a
+          results.find().to_a.map{ |item| { :name => item['_id'], :count => item['value'].to_i } }
         end
         
         def tagged_with(tags)
