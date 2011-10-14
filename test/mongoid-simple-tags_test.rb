@@ -5,6 +5,13 @@ class User
 	include Mongoid::Document
 	include Mongoid::Document::Taggable
 	field :name
+	belongs_to :organisation
+end
+
+class Organisation
+	include Mongoid::Document
+	field :name
+	has_many :users
 end
 
 describe "A Taggable model" do
@@ -25,7 +32,6 @@ describe "A Taggable model" do
 end
 
 describe "A Taggable model with tags assigned" do
-
 	before do 
 		@tag_list = "linux, tucuman, free software"
 		@user = User.new(name: 'Tuquito')
@@ -58,10 +64,51 @@ describe "A Taggable model with tags assigned" do
 	end
 
 	after do 
-		Mongoid.database.collections.each do |collection|
-			collection.remove if collection.name !=~ /^system\./ 
-		end
+		cleanup_database
 	end
 end
 
+describe "A Taggable model with scope" do
+	before do 
+		@organisation_1 = Organisation.create(name: 'Qualica')
+		@user_1 = @organisation_1.users.create(name: 'User1', tag_list: "ubuntu, linux, tucuman")
+		@user_2 = @organisation_1.users.create(name: 'User2', tag_list: "ubuntu, linux, tucuman")
+		@organisation_2 = Organisation.create(name: 'Microsoft')
+		@user_3 = @organisation_2.users.create(name: 'User3', tag_list: 'microsoft, windows, tucuman')
+		@user_4 = @organisation_2.users.create(name: 'User4', tag_list: 'ubuntu, linux, tucuman')
+	end
 
+	it "should return scoped tags when passing one option" do 
+		results = User.scoped_tags(organisation_id: @organisation_1.id)
+		assert !results.empty?
+		assert results.include?( {"_id"=>"linux", "value"=>2.0} )
+		assert results.include?( {"_id"=>"ubuntu", "value"=>2.0} )
+		assert results.include?( {"_id"=>"tucuman", "value"=>2.0} )
+		
+		results = User.scoped_tags(organisation_id: @organisation_2.id)
+		assert !results.empty?
+		assert results.include?( {"_id"=>"linux", "value"=>1.0} )
+		 assert results.include?( {"_id"=>"microsoft", "value"=>1.0} )
+		 assert results.include?( {"_id"=>"windows", "value"=>1.0} )
+		 assert results.include?( {"_id"=>"tucuman", "value"=>2.0} )
+	end
+
+	it "should return scoped tags when passing more than one option" do
+		results = User.scoped_tags(organisation_id: @organisation_1.id, name: @user_1.name)
+		assert !results.empty?
+		assert results.include?( {"_id"=>"linux", "value"=>1.0} )
+		assert results.include?( {"_id"=>"ubuntu", "value"=>1.0} )
+		assert results.include?( {"_id"=>"tucuman", "value"=>1.0} )
+	end
+
+	after do
+		cleanup_database
+	end
+
+end
+
+def cleanup_database
+	Mongoid.database.collections.each do |collection|
+		collection.remove if collection.name !=~ /^system\./ 
+	end
+end
