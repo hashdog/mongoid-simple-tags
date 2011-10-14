@@ -7,12 +7,16 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-require 'test/unit'
-require 'shoulda'
+require 'minitest/autorun'
+require 'minitest/spec'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
+require 'mongoid'
 require 'mongoid-simple-tags'
 
-class Test::Unit::TestCase
+Mongoid.configure do |config|
+	config.master = Mongo::Connection.new.db("mongoid_simple_tags_test")
 end
+
+

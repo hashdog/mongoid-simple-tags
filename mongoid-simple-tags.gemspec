@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
     "lib/mongoid-simple-tags.rb",
     "mongoid-simple-tags.gemspec",
     "test/helper.rb",
-    "test/test_mongoid-simple-tags.rb"
+    "test/mongoid-simple-tags_test.rb"
   ]
   s.homepage = %q{http://github.com/chebyte/mongoid-simple-tags}
   s.licenses = ["MIT"]
