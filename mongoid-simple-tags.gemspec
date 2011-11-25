@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mongoid-simple-tags}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["chebyte"]
-  s.date = %q{2011-06-15}
+  s.date = %q{2011-11-25}
   s.description = %q{basic and simple tagging system for mongoid}
   s.email = %q{maurotorres@gmail.com}
   s.extra_rdoc_files = [
