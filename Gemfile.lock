@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     mongoid-simple-tags (0.0.6)
-      bson_ext (~> 1.5)
+      bson_ext (~> 1.6)
       mongoid (~> 2.4)
 
 GEM
