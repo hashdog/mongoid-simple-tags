@@ -1,0 +1,6 @@
+test:
+  sessions:
+    default:
+      database: mongoid-simple-tags
+      hosts:
+        - localhost:27017
