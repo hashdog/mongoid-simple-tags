@@ -4,9 +4,7 @@ module Mongoid
       def self.included(base)
         base.class_eval do |klass|
           klass.field :tags, :type => Array    
-          klass.index :tags      
-          
-          klass.send :after_save, :rebuild_tags
+          klass.index({ tags: 1 }, { background: true })
         
           include InstanceMethods
           extend ClassMethods
@@ -22,59 +20,42 @@ module Mongoid
         def tag_list
           self.tags.join(", ") if tags
         end
-        
-        protected
-          def rebuild_tags
-            self.collection.map_reduce(
-              "function() { if(this.tags) this.tags.forEach(function(t){ emit(t, 1); }); }",
-              "function(key,values) { var count = 0; values.forEach(function(v){ count += v; }); return count; }",
-              { :out => 'tags' }
-            )
-          end
       end
  
 
       module ClassMethods
-        
-        def all_tags(opts={})
-          tags = Mongoid.master.collection('tags')
-          opts.merge(:sort => ["_id", :desc]) unless opts[:sort]
-          tags.find({}, opts).to_a.map!{|item| { :name => item['_id'], :count => item['value'].to_i } }
+
+        def all_tags(scope = {})
+          map = %Q{
+            function() {
+              if(this.tags){
+                this.tags.forEach(function(tag){
+                  emit(tag, 1)
+                });
+              }
+            }
+          }
+
+          reduce = %Q{
+            function(key, values) {
+              var tag_count = 0 ;
+              values.forEach(function(value) {
+                tag_count += value;
+              });
+              return tag_count;
+            }
+          }
+
+          tags = self
+          tags = tags.where(scope) if scope.present?
+
+          results = tags.map_reduce(map, reduce).out(inline: true)
+          results.to_a.map!{ |item| { :name => item['_id'], :count => item['value'].to_i } }
         end
 
-        def scoped_tags(options={})
-          map = <<-MAP
-            function() { 
-              if(this.tags) {
-                this.tags.forEach( function(t) {
-                    emit(t, 1)
-                })
-              } 
-            }
-          MAP
-
-          reduce = <<-REDUCE
-            function(key,values) { 
-              var count = 0 
-              values.forEach(function(v){ 
-                count += v
-              }) 
-              return count
-            }
-          REDUCE
-
-          scope = {}
-          options.each do |key, value|
-            scope[key] = {'$in' => [value]} 
-          end
-          
-          results = self.collection.map_reduce(
-            map,
-            reduce,
-            :out => "scoped_tags",
-            :query => scope
-          )
-          results.find().to_a.map{ |item| { :name => item['_id'], :count => item['value'].to_i } }
+        def scoped_tags(scope = {})
+          warn "[DEPRECATION] `scoped_tags` is deprecated.  Please use `all_tags` instead."
+          all_tags(scope)
         end
         
         def tagged_with(tags)
