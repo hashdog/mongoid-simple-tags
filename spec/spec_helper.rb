@@ -1,8 +1,10 @@
 require 'mongoid'
 require 'mongoid-simple-tags'
 
-Mongoid.configure do |config|
-	config.master = Mongo::Connection.new.db("mongoid_simple_tags_test")
+Mongoid.load!("mongoid.yml", :test)
+
+RSpec.configure do |config|
+  config.after(:each) do
+    Mongoid::Config.purge!
+  end
 end
-
-
