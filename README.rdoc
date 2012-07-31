@@ -1,4 +1,4 @@
-= mongoid-simple-tags
+= mongoid-simple-tags {<img src="https://secure.travis-ci.org/chebyte/mongoid-simple-tags.png"/>}[http://travis-ci.org/chebyte/mongoid-simple-tags]
 
 mongoid-simple-tags is a basic and simple tagging system for mongoid using map-reduce function
 (no backwards compatibility with mongoid v2!)
