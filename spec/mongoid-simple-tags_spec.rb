@@ -29,6 +29,13 @@ describe "A Taggable model" do
     user.tag_list = tag_list
     user.tags.should == tags
   end
+
+  it "returns an empty array if there are no tags" do
+    user.tags = nil
+    user.tags.should_not be_nil
+    user.tags.should eql([])
+  end
+
 end
 
 

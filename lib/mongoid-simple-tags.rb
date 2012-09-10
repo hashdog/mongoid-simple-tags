@@ -3,7 +3,7 @@ module Mongoid
     module Taggable
       def self.included(base)
         base.class_eval do |klass|
-          klass.field :tags, :type => Array    
+          klass.field :tags, :type => Array, :default => []
           klass.index({ tags: 1 }, { background: true })
         
           include InstanceMethods
@@ -19,6 +19,10 @@ module Mongoid
 
         def tag_list
           self.tags.join(", ") if tags
+        end
+
+        def tags
+          super || []
         end
       end
  
