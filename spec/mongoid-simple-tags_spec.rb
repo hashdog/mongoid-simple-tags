@@ -22,6 +22,10 @@ describe "A Taggable model" do
     user.should respond_to(:tag_list)
   end
 
+  it "should have a tag_list class method" do
+    User.should respond_to(:tag_list)
+  end
+
   it "should be able to update a tag list" do
     tag_list = "linux, tucuman, free software"
     tags = tag_list.split(',').map{ |tag| tag.strip}.flatten
@@ -35,6 +39,8 @@ describe "A Taggable model" do
     user.tags.should_not be_nil
     user.tags.should eql([])
   end
+
+
 
 end
 
@@ -67,6 +73,11 @@ describe "A Taggable model with tags assigned" do
       {:name => "tucuman",        :count => 1}
     ]
     User.all_tags.should == expected_tag_list
+  end
+
+  it "returns an array of all tags used on all instances of a model" do
+    User.create(name: 'ubuntu', tag_list: 'linux')
+    User.tag_list.sort.should == ["linux", "tucuman", "free software"].sort
   end
 
 end
