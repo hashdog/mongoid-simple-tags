@@ -5,13 +5,13 @@ module Mongoid
         base.class_eval do |klass|
           klass.field :tags, :type => Array, :default => []
           klass.index({ tags: 1 }, { background: true })
-        
+
           include InstanceMethods
           extend ClassMethods
-          
+
         end
       end
-      
+
       module InstanceMethods
         def tag_list=(tags)
           self.tags = tags.split(",").collect{ |t| t.strip }.delete_if{ |t| t.blank? }
@@ -25,7 +25,7 @@ module Mongoid
           super || []
         end
       end
- 
+
 
       module ClassMethods
 
@@ -61,13 +61,13 @@ module Mongoid
           warn "[DEPRECATION] `scoped_tags` is deprecated.  Please use `all_tags` instead."
           all_tags(scope)
         end
-        
+
         def tagged_with(tags)
           tags = [tags] unless tags.is_a? Array
-          criteria.in(:tags => tags).to_a
+          criteria.in(:tags => tags)
         end
       end
-      
+
     end
   end
 end
