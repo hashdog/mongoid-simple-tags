@@ -1,4 +1,4 @@
 rvm:
   - 1.9.3
-
+services: mongodb
 script: rake spec
