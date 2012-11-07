@@ -6,11 +6,11 @@ mongoid-simple-tags is a basic and simple tagging system for mongoid using map-r
 == Install
 
   Add the following to Gemfile:
-  
+
     gem "mongoid-simple-tags", "0.0.7"
 
 == Usage
- 
+
 === Model
 
   class User
@@ -34,9 +34,10 @@ mongoid-simple-tags is a basic and simple tagging system for mongoid using map-r
   User.tagged_with("linux") # => [u, u2]
 
   # using map-reduce function
-  
-  User.all_tags #=>[{:name=>"free software", :count=>1}, {:name=>"linux", :count=>2}, {:name=>"tucuman", :count=>1}] 
 
+  User.all_tags #=>[{:name=>"free software", :count=>1}, {:name=>"linux", :count=>2}, {:name=>"tucuman", :count=>1}]
+
+  User.tag_list #=>["free software", "linux", "tucuman"]
 
 == Copyright
 
