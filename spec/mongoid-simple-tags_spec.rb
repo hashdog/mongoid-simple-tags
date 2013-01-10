@@ -80,6 +80,15 @@ describe "A Taggable model with tags assigned" do
     User.tag_list.sort.should == ["linux", "tucuman", "free software"].sort
   end
 
+  it 'should be able to find tagged_with_all objects' do
+    user_2 = User.create! name: 'Jane Doe', tag_list: 'linux, foo, bar'
+
+    User.tagged_with_all(%w[foo linux]).should == [user_2]
+    User.tagged_with_all('linux').should =~ [@user, user_2]
+    User.tagged_with_all(%w[linux]).should =~ [@user, user_2]
+    User.tagged_with_all([]).should == []
+    User.tagged_with_all(%w[foo tucuman]).should == []
+  end
 end
 
 describe "A Taggable model with scope" do

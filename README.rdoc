@@ -24,14 +24,21 @@ mongoid-simple-tags is a basic and simple tagging system for mongoid using map-r
 
   u.tags     # => ["linux","tucuman","free software"]
 
-  User.tagged_with("linux") # => u
-  User.tagged_with(["tucuman", "free software"]) # => u
+  User.tagged_with("linux") # => [u]
+  User.tagged_with(["tucuman", "free software"]) # => [u]
+  User.tagged_with(["linux", "foo"]) # => [u]
+
+  User.tagged_with_all(["linux"]) # => [u]
+  User.tagged_with_all(["linux", "foo"]) # => []
 
   u2 = User.new(:name => "ubuntu")
   u2.tag_list = "linux"
   u2.save
 
   User.tagged_with("linux") # => [u, u2]
+  User.tagged_with(["linux", "tucuman"]) # => [u, u2]
+
+  User.tagged_with_all(["linux", "tucuman"]) # => [u]
 
   # using map-reduce function
 
