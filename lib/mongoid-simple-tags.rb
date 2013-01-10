@@ -67,9 +67,15 @@ module Mongoid
           criteria.in(:tags => tags)
         end
 
+        def tagged_with_all(tags)
+          tags = [tags] unless tags.is_a? Array
+          criteria.all(:tags => tags)
+        end
+
         def tag_list
           self.all_tags.collect{|tag| tag[:name]}
         end
+
       end
 
     end
