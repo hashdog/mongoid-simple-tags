@@ -13,7 +13,6 @@ class Organization
   has_many :users
 end
 
-
 describe "A Taggable model" do
 
   let(:user) { User.new(name: 'Tuquito') }
@@ -39,9 +38,6 @@ describe "A Taggable model" do
     user.tags.should_not be_nil
     user.tags.should eql([])
   end
-
-
-
 end
 
 
@@ -84,8 +80,8 @@ describe "A Taggable model with tags assigned" do
     user_2 = User.create! name: 'Jane Doe', tag_list: 'linux, foo, bar'
 
     User.tagged_with_all(%w[foo linux]).should == [user_2]
-    User.tagged_with_all('linux').should =~ [@user, user_2]
-    User.tagged_with_all(%w[linux]).should =~ [@user, user_2]
+    User.tagged_with_all('linux').to_a.should =~ ([@user, user_2])
+    User.tagged_with_all(%w[linux]).to_a.should =~ [@user, user_2]
     User.tagged_with_all([]).should == []
     User.tagged_with_all(%w[foo tucuman]).should == []
   end
