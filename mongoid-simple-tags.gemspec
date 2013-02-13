@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name        = "mongoid-simple-tags"
-  s.version     = "0.0.8"
+  s.version     = "0.0.9"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["chebyte"]
   s.email       = ["maurotorres@gmail.com"]
