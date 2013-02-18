@@ -7,7 +7,7 @@ mongoid-simple-tags is a basic and simple tagging system for mongoid using map-r
 
   Add the following to Gemfile:
 
-    gem "mongoid-simple-tags", "0.0.9"
+    gem "mongoid-simple-tags", "0.1.0"
 
 == Usage
 
