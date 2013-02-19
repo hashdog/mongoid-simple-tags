@@ -38,6 +38,12 @@ describe "A Taggable model" do
     user.tags.should_not be_nil
     user.tags.should eql([])
   end
+
+  it "returns an empty array even if tag_list is equal to nil" do
+    user.tag_list = nil
+    user.tags.should_not be_nil
+    user.tags.should eql([])
+  end
 end
 
 
