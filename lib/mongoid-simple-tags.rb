@@ -3,7 +3,7 @@ module Mongoid
     module Taggable
       def self.included(base)
         base.class_eval do |klass|
-          klass.field :tags, :type => Array, :default => []
+          klass.field :tags, :type => Array, :default => [], localize: true
           klass.index({ tags: 1 }, { background: true })
 
           include InstanceMethods
