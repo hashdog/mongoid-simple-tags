@@ -29,11 +29,11 @@ module Mongoid
 
       module ClassMethods
 
-        def all_tags(scope = {})
+        def all_tags(locale = I18n.locale, scope = {})
           map = %Q{
             function() {
-              if(this.tags){
-                this.tags.forEach(function(tag){
+              if(this.tags.#{locale}){
+                this.tags.#{locale}.forEach(function(tag){
                   emit(tag, 1)
                 });
               }
