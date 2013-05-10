@@ -106,14 +106,14 @@ describe "A Taggable model with scope" do
   end
 
   it "should return scoped tags when passing one option" do
-    results = User.all_tags(organization_id: @organization_1.id)
+    results = User.all_tags(:en, organization_id: @organization_1.id)
     results.empty?.should be_false
 
     results.include?( {:name => "linux", :count => 2 } ).should be_true
     results.include?( {:name => "ubuntu", :count => 2 } ).should be_true
     results.include?( {:name => "tucuman", :count => 2 } ).should be_true
 
-    results = User.all_tags(organization_id: @organization_2.id)
+    results = User.all_tags(:en, organization_id: @organization_2.id)
     results.empty?.should be_false
     results.include?( {:name =>"linux", :count => 1 } ).should be_true
     results.include?( {:name => "microsoft", :count => 1 } ).should be_true
@@ -122,7 +122,7 @@ describe "A Taggable model with scope" do
   end
 
   it "should return scoped tags when passing more than one option" do
-    results = User.all_tags(organization_id: @organization_1.id, name: @user_1.name)
+    results = User.all_tags(:en, organization_id: @organization_1.id, name: @user_1.name)
 
     results.empty?.should be_false
     results.include?( {:name => "linux", :count => 1 } ).should be_true
@@ -131,7 +131,7 @@ describe "A Taggable model with scope" do
   end
 
   it "should return scoped tags when calling deprecated scoped_tags method" do
-    results = User.all_tags(organization_id: @organization_1.id)
+    results = User.all_tags(:en, organization_id: @organization_1.id)
 
     results.empty?.should be_false
     results.include?( {:name => "linux", :count => 2 } ).should be_true
