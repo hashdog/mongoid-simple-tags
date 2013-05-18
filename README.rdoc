@@ -46,6 +46,14 @@ mongoid-simple-tags is a basic and simple tagging system for mongoid using map-r
 
   User.tag_list #=>["free software", "linux", "tucuman"]
 
+== Give back
+
+If you're using mongoig-simple-tags and you or your company is making money from it, then please consider
+donating via {Gittip}[https://www.gittip.com/chebyte/] so that I can continue to improve it.
+
+{<img src="donate.png">}[https://www.gittip.com/chebyte/]
+
+
 == Copyright
 
 Copyright (c) 2011 chebyte(mauro torres). See LICENSE.txt for
