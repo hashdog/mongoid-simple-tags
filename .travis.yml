@@ -2,3 +2,7 @@ rvm:
   - 1.9.3
 services: mongodb
 script: rake spec
+
+gemfile:
+  - Gemfile
+  - gemfiles/mongoid-3.1.gemfile
