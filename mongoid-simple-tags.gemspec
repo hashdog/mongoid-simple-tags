@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name        = "mongoid-simple-tags"
-  s.version     = "0.1.2"
+  s.version     = "0.1.3"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["chebyte"]
   s.email       = ["maurotorres@gmail.com"]
@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
-  s.add_development_dependency "rspec", "~> 2.10.0"
+  s.add_development_dependency "rspec", "~> 2.13.0"
   s.add_dependency "mongoid", ">= 3.0.3"
-  s.add_dependency "json", "~> 1.7.7"
+  s.add_dependency "json", "~> 1.8"
 
 end
