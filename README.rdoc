@@ -55,7 +55,7 @@ donating via {Gittip}[https://www.gittip.com/chebyte/] so that I can continue to
 
 == Contributors
 
-  * lucas renan - https://github.com/lucasrenan
+* lucas renan - https://github.com/lucasrenan
 
 == Copyright
 
