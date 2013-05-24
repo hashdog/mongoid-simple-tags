@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-puts Mongoid::VERSION
-
 class User
   include Mongoid::Document
   include Mongoid::Document::Taggable
