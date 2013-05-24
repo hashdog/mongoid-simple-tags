@@ -3,7 +3,7 @@ module Mongoid
     module Taggable
       def self.included(base)
         base.class_eval do |klass|
-          klass.field :tags, :type => Array, :default => [], localize: true
+          klass.field :tags, :type => Array, :default => []
           klass.index({ tags: 1 }, { background: true })
 
           include InstanceMethods
@@ -29,11 +29,11 @@ module Mongoid
 
       module ClassMethods
 
-        def all_tags(locale = I18n.locale, scope = {})
+        def all_tags(scope = {})
           map = %Q{
             function() {
-              if(this.tags.#{locale}){
-                this.tags.#{locale}.forEach(function(tag){
+              if(this.tags){
+                this.tags.forEach(function(tag){
                   emit(tag, 1)
                 });
               }
