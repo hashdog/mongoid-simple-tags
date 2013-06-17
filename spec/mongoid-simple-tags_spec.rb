@@ -67,7 +67,7 @@ describe "A Taggable model with tags assigned" do
   end
 
   it "should be not able to find tagged_without objects" do
-    User.tagged_with('linux').first.should == nil
+    User.tagged_without('linux').first.should == nil
   end
   
   it "should be not able to find tagged_without objects if more than one object is present" do
