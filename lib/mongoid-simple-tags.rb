@@ -66,6 +66,11 @@ module Mongoid
           tags = [tags] unless tags.is_a? Array
           criteria.in(:tags => tags)
         end
+        
+        def tagged_without(tags)
+          tags = [tags] unless tags.is_a? Array
+          criteria.nin(:tags => tags)
+        end
 
         def tagged_with_all(tags)
           tags = [tags] unless tags.is_a? Array
