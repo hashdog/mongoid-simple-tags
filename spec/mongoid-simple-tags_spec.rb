@@ -66,6 +66,17 @@ describe "A Taggable model with tags assigned" do
     tagged_with_list.include?(user_2).should be_true
   end
 
+  it "should be not able to find tagged_without objects" do
+    User.tagged_without('linux').first.should == nil
+  end
+  
+  it "should be not able to find tagged_without objects if more than one object is present" do
+    user_2 = User.create!(name: 'ubuntu', tag_list: 'linux')
+    tagged_with_list = User.tagged_without('tucuman')
+    tagged_with_list.include?(@user).should be_false
+    tagged_with_list.include?(user_2).should be_true
+  end
+
   it "should return all_tags per Model class" do
     User.create(name: 'ubuntu', tag_list: 'linux')
 
