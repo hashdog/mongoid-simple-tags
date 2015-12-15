@@ -1,4 +1,4 @@
-= mongoid-simple-tags {<img src="https://secure.travis-ci.org/hashdog/mongoid-simple-tags.png"/>}[http://travis-ci.org/hashdog/mongoid-simple-tags] {<img src="https://codeclimate.com/github/hashdog/mongoid-simple-tags.png" />}[https://codeclimate.com/github/hashdog/mongoid-simple-tags] {<img src="https://badge.fury.io/rb/mongoid-simple-tags.png" alt="Gem Version" />}[http://badge.fury.io/rb/mongoid-simple-tags]
+= mongoid-simple-tags {<img src="https://beerpay.io/hashdog/mongoid-simple-tags/badge.svg?style=flat-square" />}[https://beerpay.io/chebyte/mongoid-simple-tags] {<img src="https://secure.travis-ci.org/hashdog/mongoid-simple-tags.png"/>}[http://travis-ci.org/hashdog/mongoid-simple-tags] {<img src="https://codeclimate.com/github/hashdog/mongoid-simple-tags.png" />}[https://codeclimate.com/github/hashdog/mongoid-simple-tags] {<img src="https://badge.fury.io/rb/mongoid-simple-tags.png" alt="Gem Version" />}[http://badge.fury.io/rb/mongoid-simple-tags]
 
 mongoid-simple-tags is a basic and simple tagging system for mongoid using map-reduce function
 (no backwards compatibility with mongoid v2!)
