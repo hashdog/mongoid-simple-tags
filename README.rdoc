@@ -20,7 +20,7 @@ mongoid-simple-tags is a basic and simple tagging system for mongoid using map-r
 
 === Console
 
-  u = User.create(:name => "Tuquito", tag_list: "linux, tucuman, free software")
+  u = User.create(name: "Tuquito", tag_list: "linux, tucuman, free software")
 
   u.tags     # => ["linux","tucuman","free software"]
 
