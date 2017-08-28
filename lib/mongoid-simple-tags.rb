@@ -53,7 +53,8 @@ module Mongoid
           tags = self
           tags = tags.where(scope) if scope.present?
 
-          results = tags.map_reduce(map, reduce).out(inline: true)
+          # @see - https://jira.mongodb.org/browse/MONGOID-4461
+          results = tags.map_reduce(map, reduce).out(inline: (Gem.loaded_specs['mongoid'].version.to_s >= '5.2' ? 1 : true))
           results.to_a.map!{ |item| { :name => item['_id'], :count => item['value'].to_i } }
         end
 
@@ -66,7 +67,7 @@ module Mongoid
           tags = [tags] unless tags.is_a? Array
           criteria.in(:tags => tags)
         end
-        
+
         def tagged_without(tags)
           tags = [tags] unless tags.is_a? Array
           criteria.nin(:tags => tags)
